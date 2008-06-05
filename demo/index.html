@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>filtered table behavior demo</title>
+  
+  <script src="library/prototype.js" type="text/javascript"></script>
+  <script src="library/lowpro.js" type="text/javascript"></script>
+  <script src="library/tablekit.js" type="text/javascript"></script>
+  <script src="../table_filter.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="library/blueprint/screen.css" type="text/css" media="screen" />  
+  <link rel="stylesheet" href="filtered_table_demo.css" type="text/css" media="screen" />
+  
+  <script type="text/javascript">
+    Event.addBehavior({
+      "#live_filter": TableFilter(TableKit.Rows.stripe),
+      "#filter": TableFilter(TableKit.Rows.stripe, false),
+      "#filter_go:click":function(e) {
+        Event.stop(e);
+        Event.trigger($('filter'), 'keyup', {keyCode:Event.KEY_RETURN})
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>Filtered Table Behavior Demo</h1>
+  
+  <p>
+    Here's a silly little demo of the TableFilter behavior class. This is also using tablekit to provide row striping and the sorting stuff (and the demo has this because the project I pulled it out of does, too). Basically, you attach the TableFilter behavior to a input box in a <code>th</code> cell. You can pass it two optional arguments: the first a function to use to stripe the rows after they are filtered (if you need such a feature), the second argument controls whether or not the filter is live or reliant on the user hitting "return" (live is the default, pass false to disable that).
+  </p>
+  
+    <table cellspacing="0" class="sortable resizable">
+    <thead>
+      <tr>
+        <th>
+          <input type="text" value="" id="live_filter" />
+          (filtering is live)
+        </th>
+        <th>Years</th>
+      </tr>
+      <tr>
+        <th>Account</th>
+        <th class="currency">2007</th>
+        <th class="currency">2006</th>
+        <th class="currency">2005</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Account Name | Year 1 $ | Year 2 $ | Year 3 $ ... -->
+      <tr>
+        <td>A corporation</td>
+        <td>34,000</td>
+        <td>27,500</td>
+        <td>32,158</td>
+      </tr>
+      <tr>
+        <td>B Contracting, Inc.</td>
+        <td>6,500</td>
+        <td>7,250</td>
+        <td>2,200</td>
+      </tr>
+      <tr>
+        <td>Cucumber Soup Co.</td>
+        <td>23,405</td>
+        <td>1,400</td>
+        <td>33,001</td>
+      </tr>
+      <tr>
+        <td>Ace Tex Enterprises</td>
+        <td>0</td>
+        <td>0</td>
+        <td>640</td>
+      </tr>
+      <tr>
+        <td><span>Sheldon Road Crew</span></td>
+        <td>2,008</td>
+        <td>-1,241</td>
+        <td>4,391</td>
+      </tr>
+      <tr>
+        <td><span>Stoker Company</span></td>
+        <td>122</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td><span>Detroit</span></td>
+        <td>5,678</td>
+        <td>109</td>
+        <td>672</td>
+      </tr>
+      <tr>
+        <td><span>Digitron Packaging</span></td>
+        <td>790</td>
+        <td>0</td>
+        <td>1,054</td>
+      </tr>
+      <tr>
+        <td>Domino</td>
+        <td>179</td>
+        <td>1,191</td>
+        <td>532</td>
+      </tr>
+      <tr>
+        <td><span>Zzarkirl</span></td>
+        <td>4,567</td>
+        <td>0</td>
+        <td>234</td>
+      </tr>
+      <tr>
+        <td>Cohibo</td>
+        <td>4,567</td>
+        <td>34,850</td>
+        <td>48,345</td>
+      </tr>
+      <tr>
+        <td>Truck Plant B/S</td>
+        <td>1,228</td>
+        <td>2,582</td>
+        <td>469</td>
+      </tr>
+      <tr>
+        <td>Crazinmoney</td>
+        <td>26,650</td>
+        <td>13,117</td>
+        <td>540</td>
+      </tr>
+      <tr>
+        <td>Sterling</td>
+        <td>436</td>
+        <td>1,324</td>
+        <td>439</td>
+      </tr>
+      <tr>
+        <td>Wayne</td>
+        <td>0</td>
+        <td>11,499</td>
+        <td>71,510</td>
+      </tr>
+      <tr>
+        <td>Quark Industries, Inc.</td>
+        <td>1,542</td>
+        <td>4,429</td>
+        <td>1,446</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <table cellspacing="0" class="sortable">
+    <thead>
+      <tr>
+        <th>
+          <input type="text" value="" id="filter" />
+          <img src="library/tick.png" id="filter_go" alt="filter icon" title="find" class="icon" />
+          (click icon or hit enter to filter)
+        </th>
+        <th>Years</th>
+      </tr>
+      <tr>
+        <th>Account</th>
+        <th class="currency">2007</th>
+        <th class="currency">2006</th>
+        <th class="currency">2005</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Account Name | Year 1 $ | Year 2 $ | Year 3 $ ... -->
+      <tr>
+        <td>A corporation</td>
+        <td>34,000</td>
+        <td>27,500</td>
+        <td>32,158</td>
+      </tr>
+      <tr>
+        <td>B Contracting, Inc.</td>
+        <td>6,500</td>
+        <td>7,250</td>
+        <td>2,200</td>
+      </tr>
+      <tr>
+        <td>Cucumber Soup Co.</td>
+        <td>23,405</td>
+        <td>1,400</td>
+        <td>33,001</td>
+      </tr>
+      <tr>
+        <td>Ace Tex Enterprises</td>
+        <td>0</td>
+        <td>0</td>
+        <td>640</td>
+      </tr>
+      <tr>
+        <td><span>Sheldon Road Crew</span></td>
+        <td>2,008</td>
+        <td>-1,241</td>
+        <td>4,391</td>
+      </tr>
+      <tr>
+        <td><span>Stoker Company</span></td>
+        <td>122</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td><span>Detroit</span></td>
+        <td>5,678</td>
+        <td>109</td>
+        <td>672</td>
+      </tr>
+      <tr>
+        <td><span>Digitron Packaging</span></td>
+        <td>790</td>
+        <td>0</td>
+        <td>1,054</td>
+      </tr>
+      <tr>
+        <td>Domino</td>
+        <td>179</td>
+        <td>1,191</td>
+        <td>532</td>
+      </tr>
+      <tr>
+        <td><span>Zzarkirl</span></td>
+        <td>4,567</td>
+        <td>0</td>
+        <td>234</td>
+      </tr>
+      <tr>
+        <td>Cohibo</td>
+        <td>4,567</td>
+        <td>34,850</td>
+        <td>48,345</td>
+      </tr>
+      <tr>
+        <td>Truck Plant B/S</td>
+        <td>1,228</td>
+        <td>2,582</td>
+        <td>469</td>
+      </tr>
+      <tr>
+        <td>Crazinmoney</td>
+        <td>26,650</td>
+        <td>13,117</td>
+        <td>540</td>
+      </tr>
+      <tr>
+        <td>Sterling</td>
+        <td>436</td>
+        <td>1,324</td>
+        <td>439</td>
+      </tr>
+      <tr>
+        <td>Wayne</td>
+        <td>0</td>
+        <td>11,499</td>
+        <td>71,510</td>
+      </tr>
+      <tr>
+        <td>Quark Industries, Inc.</td>
+        <td>1,542</td>
+        <td>4,429</td>
+        <td>1,446</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

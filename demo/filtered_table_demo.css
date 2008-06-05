@@ -1,0 +1,44 @@
+body {
+  margin: 1em;
+}
+table.sortable {
+	width: 99%;
+}
+thead tr + tr {
+	background-color: #f1f1f1;
+}
+thead tr + tr th {
+  border-right: 1px solid #dddddd;
+}
+tr.rowodd {
+	background-color: #fafafa;
+}
+tr.roweven {
+	background-color: #ffffde;/*#F2F2F2;*/
+}
+.sortcol {
+	cursor: pointer;
+	padding-right: 20px;
+	background-repeat: no-repeat;
+	background-position: right center;
+	color: #0c0cfe;
+	text-decoration: underline;
+}
+.sortasc {
+	background-color: #DDFFAC;
+	background-image: url(library/up.gif);
+}
+.sortdesc {
+	background-color: #B9DDFF;
+	background-image: url(library/down.gif);
+}
+.nosort {
+	cursor: default;
+}
+th, td {
+  padding-left: .5em;
+}
+.icon {
+  margin-bottom: -3px;
+  margin-left: 3px;
+}
